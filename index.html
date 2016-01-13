@@ -21,14 +21,14 @@
       background: radial-gradient(#0518DB, #001DA0); /* Standard syntax */
     }
     h3 {text-decoration: underline;}
-    h1,h2,h3,.searchInfo,.emptystate,.error{color:white;}
+    h1,h2,h3,.searchInfo,.emptyState,.error,.cacheMessage{color:white;}
     .hidden {display:none;}
     .borderRadius {border-radius: 15px;padding:10px;}
     .error {border:4px solid red; padding:10px; border-radius: 10px;display: inline-block;}
     .hero .title{ font-size: 2em;}
     .hero .superpower{ font-weight: bold;}
     .hero .era{ font-size:0.8em;}
-    .emptystate {padding:50px 20px; font-size: 1.5em;}
+    .emptyState {padding:50px 20px; font-size: 1.5em;}
     .hero .panel-heading{ background-color: #C98507; color:white; font-weight: bold; border-radius: 10px;}
     .searchInfo {padding:0 20px;}
     @media (min-width: 993px) { 
@@ -54,7 +54,13 @@
       </div>
       <div class="row">  
         <div class="clearfix">
-          <div class="{{heroes.length>0?'hidden':''}} emptystate">Sorry, we found no heroes with that name. Try again.</div> 
+          <div class="{{heroes.length>0?'hidden':''}} emptyState">
+            Sorry, we found no heroes with that name. Try again.
+          </div> 
+          <div class="{{loading?'':'hidden'}} loadingState">
+            <img src="loading_spinner.gif" alt="loading spinner" />
+          </div> 
+
           <div ng-repeat="hero in heroes" class="col-xs-offset-1 col-xs-10 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-{{heroes.length==1?4:0}}">
            <div class="panel panel-default hero borderRadius">
               <div class="panel-heading borderRadius  ">
@@ -76,7 +82,7 @@
         
         <form ng-submit="refresh()">
           <div class="search">
-            <span>{{ cacheMessage }}</span>
+            <span class="cacheMessage">{{ cacheMessage }}</span>
             <br>
             <input type="text" class="borderRadius" ng-model="search">
             <input type="submit" class="borderRadius" value="Search"> 

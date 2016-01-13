@@ -60,9 +60,11 @@
     $scope.heroes = [];
     $scope.search = "";
     $scope.error = "";
+    $scope.loading = true;
 
     var searchCallback = function(result){
       console.log(result);
+      $scope.loading = false;
       if (result.error) {
         $scope.error = result.error;
         $scope.heroes = {};
@@ -79,6 +81,7 @@
       var searchString = "";
       //ensure the search string matches the requirements of the API
       if ($scope.search) searchString = $scope.search[0].toUpperCase() + $scope.search.substring(1).toLowerCase();
+      $scope.loading = true;
       RequestFactory.sendRequest(searchCallback,searchString);
       return ;
     };
