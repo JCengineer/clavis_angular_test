@@ -66,6 +66,7 @@
       if (result.error) {
         $scope.error = result.error;
         $scope.heroes = {};
+        $scope.cacheMessage = "";
       } else {
         $scope.heroes = result.heroes;
         $scope.cacheMessage = result.cache?"This result was cached on "+result.cache:"";
