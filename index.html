@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0;"/>
+
+  <title>James Clifford - ClavisInsight Technical Test</title>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.js"></script>
+  <!--script src="invoice.js"></script-->
+  <script src="heroes.js"></script>
+
+  <style type="text/css">
+    body {
+      font-size:20px;text-align: center;
+      background: #D98D00; /* For browsers that do not support gradients */
+      background: -webkit-radial-gradient(#D98D00, #A06700); /* Safari 5.1 to 6.0 */
+      background: -o-radial-gradient(#D98D00, #A06700); /* For Opera 11.6 to 12.0 */
+      background: -moz-radial-gradient(#D98D00, #A06700); /* For Firefox 3.6 to 15 */
+      background: radial-gradient(#D98D00, #A06700); /* Standard syntax */
+    }
+    h3 {text-decoration: underline;}
+    .hidden {display:none;}
+    .borderRadius {border-radius: 15px;padding:10px;}
+    .error {border:4px solid red; padding:10px; border-radius: 10px;display: inline-block;}
+    .hero .title{ font-size: 2em;}
+    .hero .superpower{ font-weight: bold;}
+    .hero .era{ font-size:0.8em;}
+    .emptystate {padding:50px 20px; font-size: 1.5em;}
+    .hero .panel-heading{ background-color: #6A4500; color:white; font-weight: bold; }
+    .searchInfo {padding:0 20px;}
+    @media (min-width: 993px) { 
+      .hero .title{ font-size: 1em;}
+      .hero {margin:20px;}
+    }
+    @media (max-width: 486px) { 
+      .hero .title{ font-size: 1.5em;} 
+    }
+  </style>
+  
+</head>
+<body>
+
+  <div ng-app="heroes" ng-controller="HeroController">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12"> 
+          <h1>James Clifford</h1>
+          <h2>ClavisInsight Technical Test</h2>
+          <h3 class="align-center">Heroes</h3>
+        </div>
+      </div>
+      <div class="row">  
+        <div class="clearfix">
+          <div class="{{heroes.length>0?'hidden':''}} emptystate">Sorry, we found no heroes with that name. Try again.</div> 
+          <div ng-repeat="hero in heroes" class="col-xs-offset-1 col-xs-10 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-{{heroes.length==1?4:0}}">
+           <div class="panel panel-default hero borderRadius">
+              <div class="panel-heading borderRadius  ">
+                <span class="title">{{ hero.name | uppercase }}</span>
+              </div>
+              <div class="panel-body">
+                Superpower:
+                <br>
+                <span class="superpower">{{ hero.superpower | uppercase }}</span>
+                <br>
+                <span class="era">{{ hero.end_of_an_era | date:'yyyy-MM-dd'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        
+        <form ng-submit="refresh()">
+          <div class="search">
+            <span>{{ cacheMessage }}</span>
+            <br>
+            <input type="text" class="borderRadius" ng-model="search">
+            <input type="submit" class="borderRadius" value="Search"> 
+            <br>
+          </div>
+        </form>
+        <div class="clearfix">
+          <div class="col-md-6 col-md-offset-3 searchInfo">Please search for a hero's name. The search is not case sensitive. Any searches that are requested again are restored from the local cache and will display a message.</div>
+        </div>
+        <div>
+          <br>
+          <span class="{{error?'':'hidden'}} error">{{ error }}</span>
+          <br>
+          <button class="borderRadius" ng-click="requestError()">Request error</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>
